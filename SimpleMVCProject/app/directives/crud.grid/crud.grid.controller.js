@@ -212,7 +212,7 @@ function crudgridController($scope, $element, $attrs, ajaxServiceFactory, notifi
                 });
         };
 
-        var title = "Delete '" + item.name + "'";
+        var title = "Delete '" + item.username + "'";
         var msg = "Are you sure you want to remove this item?";
         modalWindowFactory.show(title, msg, serverDelete);
 
