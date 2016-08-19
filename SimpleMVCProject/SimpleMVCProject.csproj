@@ -257,7 +257,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Home.html" />
+    <Content Include="images\Add.png" />
+    <Content Include="images\Delete.png" />
+    <Content Include="images\Edit.png" />
     <Content Include="images\loading.gif" />
+    <Content Include="images\Saved.png" />
+    <Content Include="images\View.png" />
     <Content Include="Models\Item.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Item.edmx</DependentUpon>
