@@ -12,7 +12,7 @@ namespace SimpleMVCProject.ViewModels
         public int Id { get; set; }
 
         [DataMember]
-        public string Place { get; set; }
+        public int Place { get; set; }
 
         [DataMember]
         public string Username { get; set; }
@@ -29,7 +29,6 @@ namespace SimpleMVCProject.ViewModels
         [DataMember]
         public string Website { get; set; }
 
-        // [DataMember]
-        // public virtual City MigratingTo { get; set; }
+      
     }
 }

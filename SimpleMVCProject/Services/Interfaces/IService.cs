@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleMVCProject.Services.Interfaces
 {
@@ -7,7 +8,7 @@ namespace SimpleMVCProject.Services.Interfaces
     {
         bool PutItem(T item);
         T GetItem(int id);
-        IEnumerable<T> GetItems();       
+        IQueryable<T> GetItems();       
         bool Get(int id);
         bool Any(int id);
         T PostItem(T item);

@@ -12,16 +12,19 @@ namespace SimpleMVCProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Item
     {
         [Key]
         public int Id { get; set; }
         public string Username { get; set; }
-        public string Place { get; set; }
+        public int Place { get; set; }
         public string DateOfTravel { get; set; }
         public string FlightName { get; set; }
         public string FlightCost { get; set; }
         public string Website { get; set; }
+        [ForeignKey("Place")]
+        public virtual City City { get; set; }
     }
 }

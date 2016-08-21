@@ -5,47 +5,123 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ExpatMigModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="SeqNo" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Place" Type="nvarchar" MaxLength="100" />
+          <Property Name="Place" Type="int" Nullable="false" />
           <Property Name="DateOfTravel" Type="nvarchar" MaxLength="100" />
           <Property Name="FlightName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="FlightCost" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Website" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_dbo_Items_dbo_Cities_Place">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ExpatMigModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Items_dbo_Cities_Place" Association="Self.FK_dbo_Items_dbo_Cities_Place">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExpatMigModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="SeqNo" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_dbo_Items_dbo_Cities_Place" FromRole="Cities" ToRole="Items" />
+        </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="Int32" Nullable="false" />
           <Property Name="DateOfTravel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FlightName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FlightCost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_dbo_Items_dbo_Cities_Place" FromRole="Items" ToRole="Cities" />
         </EntityType>
-        <EntityContainer Name="ExpatMigEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_dbo_Items_dbo_Cities_Place">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpatMigEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Items" EntityType="Self.Item" />
+          <AssociationSet Name="FK_dbo_Items_dbo_Cities_Place" Association="Self.FK_dbo_Items_dbo_Cities_Place">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ExpatMigModelStoreContainer" CdmEntityContainer="ExpatMigEntities1">
+        <EntityContainerMapping StorageEntityContainer="ExpatMigModelStoreContainer" CdmEntityContainer="ExpatMigEntities2">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="ExpatMigModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="ExpatMigModel.Item">
               <MappingFragment StoreEntitySet="Items">

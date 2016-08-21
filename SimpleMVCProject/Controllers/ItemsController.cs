@@ -82,7 +82,7 @@ namespace SimpleMVCProject.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var item = _itemsService.GetItem(id);
-            if (item==null)
+            if (item == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, ServerConstants.DeleteError);
             }

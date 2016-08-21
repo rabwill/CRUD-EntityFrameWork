@@ -13,7 +13,7 @@ namespace SimpleMVCProject.Services
     { }
     public class ItemsService : IItemsService
     {
-        private ExpatMigEntities1 db = new ExpatMigEntities1();
+        private ExpatMigEntities2 db = new ExpatMigEntities2();
         #region Auto increment index
 
         private static int autoIncrementIndex = 0;
@@ -25,7 +25,7 @@ namespace SimpleMVCProject.Services
         }
 
         #endregion
-      
+
         bool IService<Item>.Any(int id)
         {
             return db.Items.Any(item => item.Id == id);
@@ -55,7 +55,7 @@ namespace SimpleMVCProject.Services
             return updateone;
         }
 
-        IEnumerable<Item> IService<Item>.GetItems()
+        IQueryable<Item> IService<Item>.GetItems()
         {
             return db.Items;
         }
@@ -64,6 +64,7 @@ namespace SimpleMVCProject.Services
         {
             db.Items.Add(item);
             item.Id = GetIndex();
+           
             db.SaveChanges();
             return item;
         }
@@ -78,10 +79,7 @@ namespace SimpleMVCProject.Services
             Item updateone = (from x in db.Items
                           where x.Id == uitem.Id
                           select x).First();
-            updateone.FlightCost = uitem.FlightCost;
-            updateone.DateOfTravel = uitem.DateOfTravel;
-            updateone.FlightName = uitem.FlightName;
-            updateone.Place = uitem.Place;
+           
             db.SaveChanges();           
             return true;
 

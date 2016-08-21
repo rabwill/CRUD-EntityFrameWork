@@ -202,10 +202,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjector.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>Item.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.Context.cs">
       <AutoGen>True</AutoGen>
@@ -298,13 +302,6 @@
     <Content Include="Scripts\AngularUI\ui-router.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Item.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Item.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Item.edmx.diagram">
-      <DependentUpon>Item.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-loader.min.js.map" />
@@ -316,6 +313,13 @@
     <Content Include="Scripts\errors.json" />
     <Content Include="Content\toastr.less" />
     <Content Include="Content\toastr.scss" />
+    <EntityDeploy Include="Models\Item.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Item.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Item.edmx.diagram">
+      <DependentUpon>Item.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

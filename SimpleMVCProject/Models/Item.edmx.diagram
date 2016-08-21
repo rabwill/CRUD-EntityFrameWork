@@ -4,8 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b72998e2ba01470393877909d76adc51" Name="Diagram1" ZoomLevel="84">
-        <EntityTypeShape EntityType="ExpatMigModel.Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="935f227386f04489a63610e1ad2ca595" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="ExpatMigModel.City" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpatMigModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ExpatMigModel.FK_dbo_Items_dbo_Cities_Place" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

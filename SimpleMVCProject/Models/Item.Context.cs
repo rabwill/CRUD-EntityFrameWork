@@ -13,10 +13,10 @@ namespace SimpleMVCProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ExpatMigEntities1 : DbContext
+    public partial class ExpatMigEntities2 : DbContext
     {
-        public ExpatMigEntities1()
-            : base("name=ExpatMigEntities1")
+        public ExpatMigEntities2()
+            : base("name=ExpatMigEntities2")
         {
         }
     
@@ -25,6 +25,7 @@ namespace SimpleMVCProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Item> Items { get; set; }
     }
 }
