@@ -18,6 +18,7 @@ namespace SimpleMVCProject.Controllers
             new City{CityID = 4,    Description = "Sydney"},
             new City{CityID = 5,    Description = "Melbourne"},
         };
+
         // GET: Cities
         public ActionResult Index()
         {
