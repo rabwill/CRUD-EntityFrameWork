@@ -17,9 +17,22 @@ function cellEditorController($scope) {
     self.openDatePicker = _openDatePicker;
     
     self.fireKeyUpEvent = _fireKeyUpEvent;
-    //$scope.CityList = [{ cityid: 'Melbourne', citydesc: 'Melbourne' }, { cityid: 'Sydney', citydesc: 'Sydney' }];
 
+    //GetCities();
     
+
+    //function GetCities() {
+    //    $http({
+    //        method: 'Get',
+    //        url: '/Cities'
+    //    }).success(function (data, status, headers, config) {
+    //        self.cities = data;
+    //        alert('success');
+    //    }).error(function (data, status, headers, config) {
+    //        self.message = 'Unexpected Error';
+    //        alert('error');
+    //    });
+    //}
 
     //// PUBLIC Methods
 
@@ -33,17 +46,25 @@ function cellEditorController($scope) {
 
     //// PRIVATE Functions - Public Methods Implementation
     function _fireKeyUpEvent(args, item) {
-        // call method with parameters
+        // call method with parameters       
         self.keyUpEvent()(args, item);
     };
 
     function _openDatePicker($event) {
         $event.preventDefault();
         $event.stopPropagation();
-
+       
         self.datePickerOpen = true;
     };
 
     //// PRIVATE Functions
+    //$scope.data = {
+    //    cities: [
+    //      { id: '1', name: 'select' },
+    //      { id: '4', name: 'Sydney' },
+    //      { id: '5', name: 'Melbourne' }
+    //    ],
+    //    selectedOption: { id: '1', name: 'select' } //This sets the default value of the select in the ui
+    //};
 
 };

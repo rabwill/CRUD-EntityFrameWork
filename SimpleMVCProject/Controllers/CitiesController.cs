@@ -2,117 +2,130 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using SimpleMVCProject.Models;
 
 namespace SimpleMVCProject.Controllers
 {
-    public class CitiesController : ApiController
+    public class CitiesController : Controller
     {
-        private ExpatMigEntities2 db = new ExpatMigEntities2();
-
-        // GET: api/Cities
-        public IQueryable<City> GetCities()
+        // private ExpatMigEntities2 db = new ExpatMigEntities2();
+        private static readonly List<City> mockcityDatabase = new List<City>
         {
-            return db.Cities;
+            new City{CityID = 4,    Description = "Sydney"},
+            new City{CityID = 5,    Description = "Melbourne"},
+        };
+        // GET: Cities
+        public ActionResult Index()
+        {
+            return View(mockcityDatabase);
         }
 
-        // GET: api/Cities/5
-        [ResponseType(typeof(City))]
-        public IHttpActionResult GetCity(int id)
-        {
-            City city = db.Cities.Find(id);
-            if (city == null)
-            {
-                return NotFound();
-            }
+        //// GET: Cities/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    City city = db.Cities.Find(id);
+        //    if (city == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(city);
+        //}
 
-            return Ok(city);
-        }
+        //// GET: Cities/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // PUT: api/Cities/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCity(int id, City city)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: Cities/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "CityID,Description,IsActive,SeqNo,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] City city)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Cities.Add(city);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            if (id != city.CityID)
-            {
-                return BadRequest();
-            }
+        //    return View(city);
+        //}
 
-            db.Entry(city).State = EntityState.Modified;
+        //// GET: Cities/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    City city = db.Cities.Find(id);
+        //    if (city == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(city);
+        //}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //// POST: Cities/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "CityID,Description,IsActive,SeqNo,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] City city)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(city).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(city);
+        //}
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //// GET: Cities/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    City city = db.Cities.Find(id);
+        //    if (city == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(city);
+        //}
 
-        // POST: api/Cities
-        [ResponseType(typeof(City))]
-        public IHttpActionResult PostCity(City city)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: Cities/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    City city = db.Cities.Find(id);
+        //    db.Cities.Remove(city);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
-            db.Cities.Add(city);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = city.CityID }, city);
-        }
-
-        // DELETE: api/Cities/5
-        [ResponseType(typeof(City))]
-        public IHttpActionResult DeleteCity(int id)
-        {
-            City city = db.Cities.Find(id);
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            db.Cities.Remove(city);
-            db.SaveChanges();
-
-            return Ok(city);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CityExists(int id)
-        {
-            return db.Cities.Count(e => e.CityID == id) > 0;
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

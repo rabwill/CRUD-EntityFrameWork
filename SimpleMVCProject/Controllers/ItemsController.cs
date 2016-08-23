@@ -43,6 +43,7 @@ namespace SimpleMVCProject.Controllers
         public HttpResponseMessage Get()
         {
             var allItems = _itemsService.GetItems().Select(ItemViewModel.MapFromEntity);
+            
             return Request.CreateResponse(HttpStatusCode.OK, allItems);
         }
 
@@ -91,7 +92,7 @@ namespace SimpleMVCProject.Controllers
         }
 
 
-
+      
 
 
 

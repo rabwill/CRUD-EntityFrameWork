@@ -8,9 +8,10 @@ namespace SimpleMVCProject.Services.Interfaces
     {
         bool PutItem(T item);
         T GetItem(int id);
-        IQueryable<T> GetItems();       
+        IEnumerable<T> GetItems();       
         bool Get(int id);
         bool Any(int id);
         T PostItem(T item);
+    
     }
 }

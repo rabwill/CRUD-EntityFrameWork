@@ -18,6 +18,7 @@ namespace SimpleMVCProject.Models
         public ExpatMigEntities2()
             : base("name=ExpatMigEntities2")
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

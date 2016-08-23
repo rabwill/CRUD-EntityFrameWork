@@ -16,12 +16,12 @@ namespace SimpleMVCProject.Models
     public  class City
     {
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public City()
-        //{
-        //    this.Items = new HashSet<Item>();
-        //}
+        public City()
+        {
+            this.Items = new HashSet<Item>();
+        }
 
-         [Key]
+        [Key]
         public int CityID { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }

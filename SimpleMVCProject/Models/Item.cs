@@ -13,6 +13,7 @@ namespace SimpleMVCProject.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Configuration;
 
     public partial class Item
     {
@@ -24,7 +25,18 @@ namespace SimpleMVCProject.Models
         public string FlightName { get; set; }
         public string FlightCost { get; set; }
         public string Website { get; set; }
-        [ForeignKey("Place")]
+      
+       
         public virtual City City { get; set; }
+        //public string Description
+        //{
+
+        //    get
+        //    {
+        //        if (City == null) City = new City();
+        //        return this.City.Description;
+        //    }
+
+        //}
     }
 }
